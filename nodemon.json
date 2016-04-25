@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "ignore": ["tests/*", "node_modules/*"],
+  "watch": [
+    "src/server/",
+    "src/config/"
+  ]
+}

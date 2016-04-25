@@ -1,0 +1,42 @@
+{
+    "// docs, basically": "https://github.com/paulirish/sublime-jsfmt#formatting-rules",
+    "preset": "jquery",
+    "plugins": [
+        "esformatter-quotes",
+        // "esformatter-semicolons",
+        "esformatter-braces",
+        "esformatter-jsx"
+    ],
+    "quotes": {
+        "type": "single",
+        "avoidEscape": false
+    },
+    "indent": {
+        "value": "  " // two spaces, b.
+    },
+    "whiteSpace": {
+        "before": {
+            "ArgumentList": 0,
+            "ArgumentListObjectExpression": 0,
+            "ArgumentListFunctionExpression": 0,
+            "ArgumentListArrayExpression": 0
+        },
+        "after": {
+            "ArgumentList": 0,
+            "ArgumentListObjectExpression": 0,
+            "ArgumentListFunctionExpression": 0,
+            "ArgumentListArrayExpression": 0
+        }
+    },
+    "jsx": {
+        "formatJSX": true, //Duh! that's the deafault 
+        "attrsOnSameLineAsTag": false, // move each attribute to its own line 
+        "maxAttrsOnTag": 3, // if lower or equal than 3 attributes, they will be kept on a single line 
+        "firstAttributeOnSameLine": true, // keep the first attribute in the same line as the tag 
+        "alignWithFirstAttribute": false, // do not align attributes with the first tag 
+        "spaceInJSXExpressionContainers": " ", // default to one space. Make it empty if you don't like spaces between JSXExpressionContainers 
+        "htmlOptions": {
+            // put here the options for js-beautify.html 
+        }
+    }
+}
