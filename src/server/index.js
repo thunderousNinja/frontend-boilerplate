@@ -4,9 +4,13 @@ import intializeWebpack from '../../webpacks/intializeWebpack';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
+import reducers from '../reducers';
+import renderFullPage from '../utils/renderFullPage'
 import routes from '../routes';
+import { match, RouterContext } from 'react-router';
 import { ENV, PORT } from '../config';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 const app = express();
 const publicPath = path.resolve(__dirname, '../../public');
@@ -37,11 +41,15 @@ app.get('/*', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      res.render('index', {
-        content: ReactDOMServer.renderToString(
+      // TODO: implement async loading of initial state
+      const store = createStore(reducers)
+      const html = ReactDOMServer.renderToString(
+        <Provider store={store}>
           <RouterContext {...renderProps} />
-        )
-      });
+        </Provider>
+      )
+      const initialState = store.getState()
+      res.send(renderFullPage(html, initialState))
     } else {
       res.status(404).send('Not found')
     }
