@@ -8,12 +8,12 @@ export default function() {
   let compiler = Webpack(webpackConfig);
 
   compiler.plugin('compile', function() {
-    console.log('Bundling...');
+    console.log('📦  Bundling...');
     bundleStart = Date.now();
   });
 
   compiler.plugin('done', function() {
-    console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
+    console.log('📦  Bundled in ' + (Date.now() - bundleStart) + 'ms!');
   });
 
   let bundler = new WebpackDevServer(compiler, {
@@ -35,6 +35,6 @@ export default function() {
   });
 
   bundler.listen(8080, 'localhost', function() {
-    console.log('Bundling project, please wait...');
+    console.log('📦  Bundling project, please wait...');
   });
 }

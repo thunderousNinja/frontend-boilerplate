@@ -1,8 +1,7 @@
-import App from './containers/App';
-import React from 'react';
 import ReactDOM from 'react-dom';
+import routes from './routes';
 
 ReactDOM.render(
-    <App/>,
-    document.getElementById('app-mount')
+  routes,
+  document.getElementById('app-mount')
 );

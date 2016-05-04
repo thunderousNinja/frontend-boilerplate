@@ -1,10 +1,11 @@
-import App from '../containers/App';
 import express from 'express';
 import httpProxy from 'http-proxy';
 import intializeWebpack from '../../webpacks/intializeWebpack';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { match, RouterContext } from 'react-router';
+import routes from '../routes';
 import { ENV, PORT } from '../config';
 
 const app = express();
@@ -26,10 +27,24 @@ if (ENV === 'development') {
   intializeWebpack();
 }
 
-app.get('/*', function(req, res) {
-  var response = ReactDOMServer.renderToString(<App/>);
-  res.render('index', {
-    content: response
+app.get('/*', (req, res) => {
+  match({
+    location: req.url,
+    routes,
+  }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    } else if (renderProps) {
+      res.render('index', {
+        content: ReactDOMServer.renderToString(
+          <RouterContext {...renderProps} />
+        )
+      });
+    } else {
+      res.status(404).send('Not found')
+    }
   });
 });
 
@@ -38,6 +53,6 @@ proxy.on('error', (e) => {
 });
 
 app.listen(PORT, () => {
-  console.log('Environment: ' + ENV);
-  console.log('Listening: http://localhost:' + PORT);
+  console.log('🖥  Environment: ' + ENV);
+  console.log('🌍  Listening: http://localhost:' + PORT);
 });

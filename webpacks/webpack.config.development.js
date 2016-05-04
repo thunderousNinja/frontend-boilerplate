@@ -4,7 +4,6 @@ import webpack from 'webpack';
 const build = path.resolve(__dirname, '../public/build');
 const eslint = path.resolve(__dirname, '../src');
 const main = path.resolve(__dirname, '../src/index.js');
-const modules = path.resolve(__dirname, '../node_modules');
 
 export default {
   devtool: 'eval',
@@ -13,6 +12,7 @@ export default {
     'webpack-dev-server/client?http://localhost:8080',
     main
   ],
+  historyApiFallback: true,
   output: {
     path: build,
     filename: 'bundle.js',
@@ -29,8 +29,8 @@ export default {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: [modules]
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
     ]
   },
