@@ -1,0 +1,13 @@
+.flexVertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexHorizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexSpacer {
+  flex: 1;
+}

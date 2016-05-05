@@ -1,8 +1,9 @@
 {
   "verbose": true,
-  "ignore": ["tests/*", "node_modules/*"],
+  "ignore": ["tests/*", "node_modules/*", "webpack-assets.json", "webpack-stats.json"],
   "watch": [
     "src/server/",
-    "src/config/"
+    "src/config/",
+    "webpacks/"
   ]
 }

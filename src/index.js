@@ -10,8 +10,8 @@ const initialState = window.__INITIAL_STATE__
 const store = createStore(reducers, initialState)
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={ store }>
     <Router routes={ routes } history={ browserHistory } />
   </Provider>,
-  document.getElementById('app-mount')
+  document.getElementById('appMount')
 );

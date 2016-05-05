@@ -1,15 +1,21 @@
 import path from 'path';
 import webpack from 'webpack';
+import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 
 const build = path.resolve(__dirname, '../public/build');
 const eslint = path.resolve(__dirname, '../src');
 const main = path.resolve(__dirname, '../src/index.js');
+const context = path.resolve(__dirname, '..');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
+  require('./config.webpack-isomorphic-tools')
+);
 
 export default {
-  devtool: 'eval',
+  devtool: 'inline-source-map',
+  context,
   entry: [
     'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:8081',
     main
   ],
   historyApiFallback: true,
@@ -34,7 +40,11 @@ export default {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' 
+        loaders: [
+          'style-loader',
+          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass?outputStyle=expanded&sourceMap'
+        ]
       }
     ]
   },
@@ -43,11 +53,7 @@ export default {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-        "process.env": {
-            BROWSER: JSON.stringify(true)
-        }
-    })
+    webpackIsomorphicToolsPlugin.development(true)
   ],
 
   resolve: {

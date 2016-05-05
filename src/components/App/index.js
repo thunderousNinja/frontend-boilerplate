@@ -1,11 +1,10 @@
 import React from 'react';
-
-const styles = (process.env.BROWSER && require('./index.scss')) || {};
+import styles from './index.scss';
 
 class App extends React.Component {
   render() {
     return (
-      <div className={styles.app}>
+      <div className={ styles.app }>
         { this.props.children }
       </div>
       );
