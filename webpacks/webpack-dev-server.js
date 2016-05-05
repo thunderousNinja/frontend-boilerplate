@@ -33,7 +33,7 @@ let bundler = new WebpackDevServer(compiler, {
   }
 });
 
-bundler.listen(8081, 'localhost', function() {
+bundler.listen(8080, 'localhost', function() {
   console.log('🚧  Webpack development server listening on port 8080');
   console.log('📦  Bundling, please wait...');
 });
