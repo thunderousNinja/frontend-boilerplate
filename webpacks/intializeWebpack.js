@@ -1,6 +1,6 @@
 import Webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import webpackConfig from './webpack.config.development.js';
+import webpackConfig from './config.development.js';
 import path from 'path';
 
 export default function() {

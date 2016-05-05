@@ -1,3 +1,5 @@
+delete process.env.BROWSER;
+
 import express from 'express';
 import httpProxy from 'http-proxy';
 import intializeWebpack from '../../webpacks/intializeWebpack';

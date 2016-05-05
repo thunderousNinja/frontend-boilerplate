@@ -32,13 +32,22 @@ export default {
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
+      {
+        test: /\.scss$/,
+        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' 
+      }
     ]
   },
   // We have to manually add the Hot Replacement plugin when running
   // from Node
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+        "process.env": {
+            BROWSER: JSON.stringify(true)
+        }
+    })
   ],
 
   resolve: {
