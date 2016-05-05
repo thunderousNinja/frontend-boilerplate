@@ -1,12 +1,12 @@
 const initialState = {
-  title: 'UNKNOWN'
+  text: 'FROM THE INITIAL STATE'
 };
 
 export default function nav(state = initialState, action) {
   switch (action.type) {
-    case 'change title':
+    case 'change text':
       return Object.assign({}, state, {
-        title: action.title
+        text: action.text
       })
     default:
       return state

@@ -1,4 +1,4 @@
-import App from './containers/App';
+import App from './components/App';
 import Foo from './containers/Foo';
 import Home from './containers/Home';
 import React from 'react';

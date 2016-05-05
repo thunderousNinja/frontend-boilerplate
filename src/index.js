@@ -8,7 +8,7 @@ import { browserHistory, Router } from 'react-router'
 
 const initialState = window.__INITIAL_STATE__
 const store = createStore(reducers, initialState)
-console.log(initialState);
+
 ReactDOM.render(
   <Provider store={store}>
     <Router routes={ routes } history={ browserHistory } />

@@ -3,7 +3,7 @@ export default function renderFullPage(html, initialState) {
     <!doctype html>
     <html>
       <head>
-        <title>Redux Universal Example</title>
+        <title>frontend-boilerplate</title>
       </head>
       <body>
         <div id='app-mount'>${html}</div>
