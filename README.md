@@ -1,17 +1,17 @@
-# Installation
+## Installation
 
 ```bash
 npm install
 ```
 
-# Usage
+## Usage
 
-## Development
+### Development
 
 ```bash
 npm run dev 
 ```
 
-## Production
+### Production
 
 Coming soon...
