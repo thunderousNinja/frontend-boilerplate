@@ -1,9 +1,5 @@
 @import '../../styles/flex';
 
-body {
-  overflow: hidden;
-}
-
 .app {
   composes: flexVertical;
   position: absolute;

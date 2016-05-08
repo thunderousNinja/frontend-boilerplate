@@ -2,6 +2,7 @@ import Webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './config.development.js';
 import path from 'path';
+import { DEV_SERVER_PORT } from '../src/config';
 
 let bundleStart = null;
 let compiler = Webpack(webpackConfig);
@@ -33,7 +34,9 @@ let bundler = new WebpackDevServer(compiler, {
   }
 });
 
-bundler.listen(8080, 'localhost', function() {
-  console.log('🚧  Webpack development server listening on port 8080');
+bundler.listen(DEV_SERVER_PORT, 'localhost', function() {
+  console.log(
+    '🚧  Webpack development server listening on port ' + DEV_SERVER_PORT
+  );
   console.log('📦  Bundling, please wait...');
 });

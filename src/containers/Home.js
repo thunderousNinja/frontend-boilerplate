@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import { changeToLocal } from '../actions/nav';
 
 class Home extends React.Component {
+
+  _changeToLocal() {
+    this.props.changeToLocal('JON IS AWESOME')
+  }
+
   render() {
     return (
       <div>
-        HOME
-        <div onClick={ () => {
-                         this.props.changeToLocal('JON IS AWESOME')
-                       } }>
+        HOMEsads
+        <div onClick={ this._changeToLocal }>
           { this.props.nav.text }
         </div>
       </div>

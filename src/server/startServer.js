@@ -7,7 +7,7 @@ import reducers from '../reducers';
 import renderFullPage from '../utils/renderFullPage'
 import routes from '../routes';
 import { match, RouterContext } from 'react-router';
-import { ENV, PORT } from '../config';
+import { DEV_SERVER_PORT, ENV, PORT } from '../config';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
@@ -23,7 +23,7 @@ if (ENV === 'development') {
   // any requests to localhost:3000/build is proxied to webpack-dev-server.
   app.all('/build/*', function(req, res) {
     proxy.web(req, res, {
-      target: 'http://localhost:8080'
+      target: 'http://localhost:' + DEV_SERVER_PORT
     });
   });
 }

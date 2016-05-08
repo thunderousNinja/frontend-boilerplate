@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
+import { DEV_SERVER_PORT } from '../src/config';
 
 const build = path.resolve(__dirname, '../public/build');
 const eslint = path.resolve(__dirname, '../src');
@@ -15,7 +16,7 @@ export default {
   context,
   entry: [
     'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:' + DEV_SERVER_PORT,
     main
   ],
   historyApiFallback: true,

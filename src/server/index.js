@@ -1,14 +1,11 @@
+import WebpackIsomorphicTools from 'webpack-isomorphic-tools';
 import { ENV, PORT } from '../config';
 
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools')
-
 const rootDir = require('path').resolve(__dirname, '..', '..')
+const config = require('../../webpacks/config.webpack-isomorphic-tools');
 
-var Webpack_isomorphic_tools = require('webpack-isomorphic-tools')
-
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-global.isomorphicTools = new WebpackIsomorphicTools(require('../../webpacks/config.webpack-isomorphic-tools'))
+global.isomorphicTools = new WebpackIsomorphicTools(config)
   .development(process.env.NODE_ENV === 'development')
-  .server(rootDir, function() {
+  .server(rootDir, () => {
     require('./startServer');
   });
