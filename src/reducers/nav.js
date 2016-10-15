@@ -1,5 +1,5 @@
 const initialState = {
-  text: 'FROM THE INITIAL STATE'
+  text: 'This is data coming from the server! 👍'
 };
 
 export default function nav(state = initialState, action) {
