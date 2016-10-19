@@ -1,22 +1,21 @@
 import path from 'path';
 import webpack from 'webpack';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
-import { DEV_SERVER_PORT } from '../src/config';
+import CleanPlugin from 'clean-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const build = path.resolve(__dirname, '../public/build');
 const eslint = path.resolve(__dirname, '../src');
 const main = path.resolve(__dirname, '../src/index.js');
-const context = path.resolve(__dirname, '..');
+const context = path.resolve(__dirname, '../');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   require('./config.webpack-isomorphic-tools')
 );
 
 export default {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   context,
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:' + DEV_SERVER_PORT,
     main
   ],
   historyApiFallback: true,
@@ -42,12 +41,9 @@ export default {
       },
       {
         test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-          'sass?outputStyle=expanded&sourceMap'
-        ]
-      },
+        loader: ExtractTextPlugin.extract('style', 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5] !sass?outputStyle=expanded&sourceMap')
+      }
+      ,
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=application/font-woff'
@@ -77,18 +73,28 @@ export default {
   // We have to manually add the Hot Replacement plugin when running
   // from Node
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new CleanPlugin([build], {
+      root: context
+    }),
+    new ExtractTextPlugin('[name]-[chunkhash].css', {
+      allChunks: true
+    }),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
-      __DEVELOPMENT__: true,
-      __DEVTOOLS__: true, // <-------- DISABLE redux-devtools HERE
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false,
       'process.env':{
-        'NODE_ENV': JSON.stringify('development')
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
-    webpackIsomorphicToolsPlugin.development(true)
+    new webpack.IgnorePlugin(/\.\/config/, /\/dev$/),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    webpackIsomorphicToolsPlugin
   ],
   progress: true,
   resolve: {

@@ -58,7 +58,7 @@ app.get('/*', (req, res) => {
         </Provider>
       )
       const initialState = store.getState()
-      res.send(renderFullPage(html, initialState, css))
+      res.send(renderFullPage(html, initialState, css, assets.javascript.main, assets.styles))
     } else {
       res.status(404).send('Not found')
     }

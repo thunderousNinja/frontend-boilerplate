@@ -14,7 +14,9 @@ npm run dev
 
 ### Production
 
-Coming soon...
+```bash
+npm run prod 
+```
 
 ## Contributing
 
