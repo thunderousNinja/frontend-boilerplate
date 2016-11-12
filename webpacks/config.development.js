@@ -1,3 +1,4 @@
+import aliases from './aliases';
 import path from 'path';
 import webpack from 'webpack';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
@@ -92,6 +93,7 @@ export default {
   ],
   progress: true,
   resolve: {
+    alias: aliases,
     modulesDirectories: [
       'src',
       'node_modules'

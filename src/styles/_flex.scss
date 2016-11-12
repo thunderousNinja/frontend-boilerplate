@@ -1,13 +1,18 @@
 .flexVertical {
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
 }
 
 .flexHorizontal {
   display: flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
 }
 
 .flexSpacer {
   flex: 1;
+}
+
+.flexCenter {
+  justify-content: center;
+  align-items: center;
 }

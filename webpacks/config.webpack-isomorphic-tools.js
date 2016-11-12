@@ -1,3 +1,4 @@
+import aliases from './aliases';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 
 // see this link for more info on what all of this means
@@ -95,6 +96,7 @@ module.exports = {
       }
     }
   },
+  alias: aliases,
   webpack_assets_file_path: 'webpack-assets.json',
   webpack_stats_file_path: 'webpack-stats.json',
 }
