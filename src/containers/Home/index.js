@@ -16,6 +16,7 @@ class Home extends React.Component {
       <div styleName='home'>
         <h1>welcome to frontend-boilerplate</h1>
         <h4>react // redux // eslint // webpack // css-modules</h4>
+        <img src='https://media.giphy.com/media/gx54W1mSpeYMg/giphy.gif' />
       </div>
     );
   }

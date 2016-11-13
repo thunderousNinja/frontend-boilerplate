@@ -76,6 +76,7 @@ export default {
     new CleanPlugin([build], {
       root: context
     }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity),
     new ExtractTextPlugin('[name]-[chunkhash].css', {
       allChunks: true
     }),
