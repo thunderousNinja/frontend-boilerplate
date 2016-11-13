@@ -1,3 +1,4 @@
+import aliases from './aliases';
 import path from 'path';
 import webpack from 'webpack';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
@@ -15,9 +16,17 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
 export default {
   devtool: 'source-map',
   context,
-  entry: [
-    main
-  ],
+  entry: {
+    main: [main],
+    vendor: [
+      'react',
+      'react-dom',
+      'redux',
+      'react-css-modules',
+      'react-router',
+      'react-redux'
+    ],
+  },
   historyApiFallback: true,
   output: {
     path: build,
@@ -76,7 +85,7 @@ export default {
     new CleanPlugin([build], {
       root: context
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity),
+    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor'], minChunks: 3 }),
     new ExtractTextPlugin('[name]-[chunkhash].css', {
       allChunks: true
     }),
@@ -99,6 +108,7 @@ export default {
   ],
   progress: true,
   resolve: {
+    alias: aliases,
     modulesDirectories: [
       'src',
       'node_modules'
